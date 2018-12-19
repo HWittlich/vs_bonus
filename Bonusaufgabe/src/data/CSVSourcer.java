@@ -42,7 +42,7 @@ public class CSVSourcer implements DataSource {
 	@Override
 	public WeatherData getData(LocalDate date) {
 		for (WeatherData entry : database) {
-			if (entry.getDate().isEqual(date)) {
+			if ( entry!=null && entry.getDate().isEqual(date)) {
 				return entry;
 			}
 		}
@@ -97,5 +97,31 @@ public class CSVSourcer implements DataSource {
 		return item;
 
 	};
+	
+//	 /**
+//         * Function that maps the hourly weather data and Date, min, max and average
+//         * temperature. Puts null if data is not complete.
+//         */
+//        private Function<String, WeatherData> mapValueToItem = (line) -> {
+//
+//                String[] p = line.split(";");// a CSV has comma separated lines
+//
+//                WeatherData item = new WeatherData();
+//                item.setDate(LocalDate.parse(p[0])); // <-- this is the first column in the csv file
+//
+//                Map<Integer, Float> weatherdata = new HashMap<>();
+//
+//                for (int i = 1; i <= 24; i++) {
+//                    try {
+//                        float temperature = Float.parseFloat(p[i]);
+//                        weatherdata.put(i - 1, temperature);
+//                    } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
+//                        item = null;
+//                        return item;
+//                    }
+//                }
+//                item.setValues(weatherdata);
+//                return item;
+//        };
 
 }
